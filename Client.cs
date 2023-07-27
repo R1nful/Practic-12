@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Collections.ObjectModel;
 
 namespace Practic_12
 {
     internal class Client
     {
-        public string Name { get; set;}
+        public string Name { get; private set; }
 
-        public ObservableCollection<Invoice> ClientInvoices;
-
-        public Client(string name, ObservableCollection<Invoice> invoice)
+        public ObservableCollection<Invoice> ClientInvoices ;
+        public Client(string name, ObservableCollection<Invoice> clientInvoices)
         {
             Name = name;
-            ClientInvoices = invoice;
+            ClientInvoices = clientInvoices;
         }
     }
 }

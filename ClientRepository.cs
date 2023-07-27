@@ -2,11 +2,9 @@
 
 namespace Practic_12
 {
-    static internal class Repository
+    static internal class ClientRepository
     {
-        // лист клиентов
         static public ObservableCollection<Client> clients = new ObservableCollection<Client>();
-
 
         /// <summary>
         /// Заполняте ObservableCollection клиентов клиентами
@@ -14,7 +12,7 @@ namespace Practic_12
         /// <param name="path"></param>
         static public void Initial(string path)
         {
-            FileBase.ReadFromFile(path, ref clients);
+            DataBase<Client>.LoadDB(path, out clients);
         }
 
         /// <summary>
@@ -23,7 +21,7 @@ namespace Practic_12
         /// <param name="path"></param>
         static public void SaveinDoc(string path)
         {
-            FileBase.SaveinFile(path, clients);
+            DataBase<Client>.SaveDB(path, clients);
         }
     }
 }

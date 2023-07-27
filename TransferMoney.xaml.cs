@@ -1,16 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Practic_12
 {
@@ -23,19 +12,21 @@ namespace Practic_12
         public TransferMoney()
         {
             InitializeComponent();
-            BaseInvoice.ItemsSource = Repository.clients;
-            TransferInvoice.ItemsSource = Repository.clients;
+            BaseInvoice.ItemsSource = ClientRepository.clients;
+            TransferInvoice.ItemsSource = ClientRepository.clients;
         }
 
         private void TransferBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (BaseInvoiceLV.SelectedItems.Count != 0 && TransferInvoiceLV.SelectedItems.Count != 0)
+            if (BaseInvoiceLV.SelectedItem != null && TransferInvoiceLV.SelectedItem!= null)
             {
-                Invoice transfer = (Invoice)TransferInvoiceLV.SelectedItems[0];
+                if (decimal.TryParse(TransferSumTB.Text, out decimal result))
+                {
+                    Invoice transfer = (Invoice)TransferInvoiceLV.SelectedItem;
 
-                ((Invoice)BaseInvoiceLV.SelectedItems[0]).TransferMoney(ref transfer, decimal.Parse(TransferSumTB.Text));
+                    ((Invoice)BaseInvoiceLV.SelectedItem).TransferMoney(ref transfer, result);
+                }
             }
-
         }
 
         private void BaseInvoice_SelectionChanged(object sender, SelectionChangedEventArgs e)

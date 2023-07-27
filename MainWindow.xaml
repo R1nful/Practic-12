@@ -3,61 +3,108 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Practic_12"
+        xmlns:local="clr-namespace:Practic_12" 
+        xmlns:sys="clr-namespace:System;assembly=netstandard" 
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="550">
-    
+        Title="MainWindow" Height="450" Width="600" MinWidth="550" MinHeight="400">
+    <Window.Resources>
+        <sys:Double x:Key="BtnFontSize">20</sys:Double>
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="4*"/>
-            <RowDefinition Height="0.8*"/>
-            <RowDefinition Height="0.8*"/>
-            <RowDefinition Height="0.8*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.6*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Button x:Name="BlockInvoiceBtn"
-                Grid.Column="1"
+        <Grid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.8*"/>
+                <RowDefinition Height="0.8*"/>
+                <RowDefinition Height="0.8*"/>
+                <RowDefinition Height="0.8*"/>
+                <RowDefinition Height="0.8*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox x:Name="AddBalanceTB"
+                 Margin="10 0"
+                 TextAlignment="Center"
+                 VerticalContentAlignment="Center" 
+                 Grid.Row="1" 
+                 TextWrapping="Wrap" 
+                 Text="0" 
+                 />
+            
+            <Button x:Name="CreateInvoiceBtn"
+                Grid.Column="2"
+                Grid.Row="0"
+                Content="Открыть новый Счет"
+                FontSize="{StaticResource BtnFontSize}" Click="CreateInvoiceBtn_Click" 
+                />
+
+            <Button x:Name="AddInvoiceBtn"
+                Grid.Column="2"
                 Grid.Row="1"
+                Content="Пополнить Счет"
+                FontSize="18" Click="AddInvoiceBtn_Click" 
+                />
+
+            <Button x:Name="BlockInvoiceBtn"
+                Grid.Column="2"
+                Grid.Row="2"
                 Content="Изменить состояние счета"
                 FontSize="18" Click="BlockInvoiceBtn_Click"
                 />
-        
-        <Button x:Name="TransferBtn"
+
+            <Button x:Name="TransferBtn"
                 FontSize="20"
                 Content="Перевсети деньги"
-                Grid.Column="1"
-                Grid.Row="2" 
+                Grid.Column="2"
+                Grid.Row="3" 
                 Click="TransferBtn_Click"/>
-        
-        <Button x:Name="SaveBtn" 
+
+            <Button x:Name="SaveBtn" 
                 Content="Сохранить"
                 FontSize="20"
-                Grid.Column="1" 
-                Grid.Row="3"
+                Grid.Column="2" 
+                Grid.Row="4"
                 Click="SaveBtn_Click"/>
-        
-        <StackPanel>
-            <ComboBox x:Name="ClientCB"
-                      SelectedIndex="0" 
-                      SelectionChanged="ClientCB_SelectionChanged" >
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Path=Name}"/>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
+        </Grid>
 
-            <ListView x:Name="InvoiceLV" >
+        <StackPanel ScrollViewer.VerticalScrollBarVisibility="Disabled">
+            <StackPanel x:Name="stackPanel" Orientation="Horizontal">
+                <TextBlock Text="Выберите клиента:"
+                           Margin="5 2 10 2"/>
+
+                <ComboBox x:Name="ClientCB"
+                          SelectedIndex="0" 
+                          SelectionChanged="ClientCB_SelectionChanged">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+            <ListView x:Name="InvoiceLV" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Number" DisplayMemberBinding="{Binding Number}"/>
                         <GridViewColumn Header="Owner" DisplayMemberBinding="{Binding Owner}"/>
                         <GridViewColumn Header="Balance" DisplayMemberBinding="{Binding Balance}"/>
+                        <GridViewColumn Header="Type" DisplayMemberBinding="{Binding TypeInvoice}"/>
                         <GridViewColumn Header="Open" DisplayMemberBinding="{Binding IsOpen}"/>
                     </GridView>
                 </ListView.View>
@@ -65,5 +112,7 @@
 
         </StackPanel>
         
+        <GridSplitter Grid.Column="1" ShowsPreview="False" Width="3"
+        HorizontalAlignment="Center" VerticalAlignment="Stretch" />
     </Grid>
 </Window>

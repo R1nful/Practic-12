@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Practic_12"
         mc:Ignorable="d"
-        Title="TransferMoney" Height="300" Width="400">
+        Title="TransferMoney" Height="300" Width="400" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -64,15 +64,18 @@
         </ListView>
         
         <Button x:Name="TransferBtn"
+                Margin="10"
                 Grid.Column="1" 
                 Grid.Row="2" 
                 Content="Перевести" Click="TransferBtn_Click" 
                 />
         <TextBox x:Name="TransferSumTB"
+                 Margin="10"
                  Grid.Row="2" 
                  TextWrapping="Wrap" 
+                 VerticalContentAlignment="Center" 
                  TextAlignment="Center"
-                 Text="0" 
+                 Text="0"  
                  />
 
 

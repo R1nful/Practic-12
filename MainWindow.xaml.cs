@@ -10,9 +10,9 @@ namespace Practic_12
         public MainWindow()
         {
             InitializeComponent();
-            Repository.Initial(path);
+            ClientRepository.Initial(path);
 
-            ClientCB.ItemsSource = Repository.clients;
+            ClientCB.ItemsSource = ClientRepository.clients;
         }
 
         private void ClientCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -22,8 +22,8 @@ namespace Practic_12
 
         private void BlockInvoiceBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (InvoiceLV.SelectedItems.Count != 0)
-                (InvoiceLV.SelectedItems[0] as Invoice).ChangeOpen();
+            if (InvoiceLV.SelectedItem != null)
+                (InvoiceLV.SelectedItem as Invoice).ChangeOpen();
         }
 
         private void TransferBtn_Click(object sender, RoutedEventArgs e)
@@ -35,7 +35,24 @@ namespace Practic_12
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            Repository.SaveinDoc(path);
+            ClientRepository.SaveinDoc(path);
+            MessageBox.Show("Данные сохранены");
+        }
+
+        private void AddInvoiceBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if(InvoiceLV.SelectedItem != null)
+            {
+                if(decimal.TryParse(AddBalanceTB.Text, out decimal result))
+                    (InvoiceLV.SelectedItem as Invoice).AddBalanse(result);
+            }
+        }
+
+        private void CreateInvoiceBtn_Click(object sender, RoutedEventArgs e)
+        {
+            CreateInvoice ciw = new CreateInvoice();
+
+            ciw.ShowDialog();
         }
     }
 }

@@ -1,40 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 
 namespace Practic_12
 {
+
     internal class Invoice : INotifyPropertyChanged
     {
-        private bool isOpen = true;
+        static long num;
+
+        static Invoice()
+        {
+            num = 1;
+        }
+
+        private bool isOpen;
         private decimal balance;
 
-        public string Number { get; }
+        public long Number { get; }
 
-        public string Owner { get;}
+        public string Owner { get; }
 
-        public decimal Balance {
-            get { 
+        public string TypeInvoice { get; }
+
+        public decimal Balance
+        {
+            get
+            {
                 return balance;
             }
         }
 
-        public bool IsOpen { 
-            get 
+        public bool IsOpen
+        {
+            get
             {
                 return isOpen;
             }
         }
 
-        public Invoice(string number, string owner, decimal _balance) {
-        
-            Number = number;
-            Owner = owner;
-            balance = _balance;
+        public Invoice(string owner, decimal balance, bool isOpen, string typeInvoice, long number = -1)
+        {
+            this.Owner = owner;
+            this.balance = balance;
+            this.isOpen = isOpen;
+            this.TypeInvoice = typeInvoice;
+
+            if(number>-1)
+                this.Number = number;
+            else 
+                this.Number = num;
+
+            num++;
         }
 
         /// <summary>
@@ -46,12 +63,20 @@ namespace Practic_12
         {
             if (isOpen && trensferInvoice.IsOpen)
             {
-                if(balance >= trensferMoney)
+                if (balance >= trensferMoney)
                 {
                     balance -= trensferMoney;
                     trensferInvoice.AddBalanse(trensferMoney);
                     OnPropertyChanged("Balance");
                 }
+                else
+                {
+                    MessageBox.Show("Перевод невозможен. Недостаточно Средств");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Перевод невозможен. Счет закрыт");
             }
         }
 
@@ -59,10 +84,15 @@ namespace Practic_12
         /// Добавляет заданное количество денег на баланс
         /// </summary>
         /// <param name="sum"></param>
-        private void AddBalanse(decimal sum)
+        public void AddBalanse(decimal sum)
         {
-            balance += sum;
-            OnPropertyChanged("balance");
+            if (isOpen)
+            {
+                balance += sum;
+                OnPropertyChanged("balance");
+            }
+            else
+                MessageBox.Show("Пополнение невозможно. Счет закрыт");
         }
 
         /// <summary>
