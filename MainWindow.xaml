@@ -13,8 +13,8 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.6*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.8*"/>
+            <RowDefinition Height="*" MaxHeight="250"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -32,20 +32,28 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.01*"/>
+                <ColumnDefinition Width="*" MaxWidth="300"/>
+                <ColumnDefinition Width="*" MaxWidth="300"/>
             </Grid.ColumnDefinitions>
 
             <TextBox x:Name="AddBalanceTB"
                  Margin="10 0"
                  TextAlignment="Center"
                  VerticalContentAlignment="Center" 
-                 Grid.Row="1" 
+                 Grid.Column="1"
+                 Grid.Row="0" 
                  TextWrapping="Wrap" 
                  Text="0" 
                  />
-            
+
+            <Button x:Name="CreateClientBtn"
+                Grid.Column="2"
+                Grid.Row="1"
+                Content="Создать нового клиента"
+                FontSize="{StaticResource BtnFontSize}" Click="CreateClientBtn_Click" 
+                />
+
             <Button x:Name="CreateInvoiceBtn"
                 Grid.Column="2"
                 Grid.Row="0"
@@ -54,7 +62,8 @@
                 />
 
             <Button x:Name="AddInvoiceBtn"
-                Grid.Column="2"
+                Margin="10 0"
+                Grid.Column="1"
                 Grid.Row="1"
                 Content="Пополнить Счет"
                 FontSize="18" Click="AddInvoiceBtn_Click" 
@@ -65,6 +74,14 @@
                 Grid.Row="2"
                 Content="Изменить состояние счета"
                 FontSize="18" Click="BlockInvoiceBtn_Click"
+                />
+            
+            <Button x:Name="DeliteInvoiceBtn"
+                Margin="10 0"
+                Grid.Column="1"
+                Grid.Row="2"
+                Content="Удалить счет"
+                FontSize="18" Click="DeliteInvoiceBtn_Click"
                 />
 
             <Button x:Name="TransferBtn"

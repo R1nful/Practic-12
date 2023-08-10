@@ -30,18 +30,22 @@ namespace Practic_12
         /// </summary>
         /// <param name="path"></param>
         /// <param name="clients"></param>
-        static public void LoadDB(string path, out ObservableCollection<T> clients)
+        static public ObservableCollection<T> LoadDB(string path)
         {
             JsonSerializerSettings settings = new JsonSerializerSettings
             {
                 TypeNameHandling = TypeNameHandling.All
             };
 
+            ObservableCollection<T> clients;
+
             using (StreamReader streamReader = new StreamReader(path))
             {
                 string text = streamReader.ReadToEnd();
                 clients = JsonConvert.DeserializeObject<ObservableCollection<T>>(text);
             }
+
+            return clients;
         }
     }
 }

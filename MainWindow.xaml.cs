@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Practic_12
@@ -17,20 +18,19 @@ namespace Practic_12
 
         private void ClientCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            InvoiceLV.ItemsSource = (ClientCB.SelectedItem as Client).ClientInvoices;
+            InvoiceLV.ItemsSource = (ClientCB.SelectedItem as Client)?.ClientInvoices;
         }
 
         private void BlockInvoiceBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (InvoiceLV.SelectedItem != null)
-                (InvoiceLV.SelectedItem as Invoice).ChangeOpen();
+                (InvoiceLV.SelectedItem as Invoice)?.ChangeOpen();
         }
 
         private void TransferBtn_Click(object sender, RoutedEventArgs e)
         {
-            TransferMoney tsw = new TransferMoney();
+            TransferMoney transferMoney = new TransferMoney();
 
-            tsw.ShowDialog();
+            transferMoney.ShowDialog();
         }
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
@@ -41,18 +41,31 @@ namespace Practic_12
 
         private void AddInvoiceBtn_Click(object sender, RoutedEventArgs e)
         {
-            if(InvoiceLV.SelectedItem != null)
-            {
-                if(decimal.TryParse(AddBalanceTB.Text, out decimal result))
-                    (InvoiceLV.SelectedItem as Invoice).AddBalanse(result);
-            }
+            if(decimal.TryParse(AddBalanceTB.Text, out decimal result))
+                (InvoiceLV.SelectedItem as Invoice)?.AddBalanse(result);
         }
 
         private void CreateInvoiceBtn_Click(object sender, RoutedEventArgs e)
         {
-            CreateInvoice ciw = new CreateInvoice();
+            CreateInvoice createInvoice = new CreateInvoice();
 
-            ciw.ShowDialog();
+            createInvoice.ShowDialog();
+        }
+
+        private void CreateClientBtn_Click(object sender, RoutedEventArgs e)
+        {
+            CreateClient createClient = new CreateClient();
+            
+            createClient.ShowDialog();
+        }
+
+        private void DeliteInvoiceBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (InvoiceLV.SelectedItem != null)
+            {
+                ClientRepository.clients[ClientCB.SelectedIndex].RemoveInvoice(InvoiceLV.SelectedItem as Invoice);
+                MessageBox.Show("Счет удален");
+            }
         }
     }
 }

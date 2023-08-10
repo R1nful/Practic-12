@@ -1,0 +1,51 @@
+﻿<Window x:Class="Practic_12.CreateClient"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Practic_12"
+        mc:Ignorable="d"
+        Title="CreateClient" Height="200" Width="400" ResizeMode="NoResize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <TextBlock Text="Введите имя клиента: "
+                   Margin="10 5 0 0"
+                   Grid.Row="1" HorizontalAlignment="Left"/>
+
+        <TextBox x:Name="ClientNameTB"
+                 Grid.Column="1"
+                 Grid.Row="1"/>
+
+
+        <Button x:Name="CreateClientBtn"
+                Content="Создать"
+                Grid.Column="1"
+                Grid.Row="3" Click="CreateClientBtn_Click"/>
+        
+        <TextBlock Text="Выберите тип клиента: "
+                   Margin="10,10,0,17"
+                   Grid.Row="2" 
+                   HorizontalAlignment="Left"/>
+        
+        <ComboBox x:Name="StatusClientCB" 
+                  Grid.Column="1"
+                  HorizontalAlignment="Left"
+                  Margin="23,7,0,0"
+                  Grid.Row="2" 
+                  SelectedIndex="0"
+                  VerticalAlignment="Top" 
+                  Width="120"/>
+    </Grid>
+</Window>

@@ -23,20 +23,20 @@ namespace Practic_12
         {
             InitializeComponent();
 
-            //TypeInvoiseCB.ItemsSource = new string[] { "Депозитный", "Недепозинтый" };
-            //ClientNameCB.ItemsSource = ClientRepository.clients;
+            TypeInvoiseCB.ItemsSource = new string[] { "Депозитный", "Недепозинтый" };
+            ClientNameCB.ItemsSource = ClientRepository.clients;
         }
 
-        //private void CreateInvoiseBtn_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Client client = ClientNameCB.SelectedItem as Client;
-        //    string typeinv= TypeInvoiseCB.SelectedValue as string;
+        private void CreateInvoiseBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Client client = ClientNameCB.SelectedItem as Client;
+            string typeinv = TypeInvoiseCB.SelectedValue as string;
 
-        //    Invoice invoice = new Invoice(client.Name, 0, true, typeinv);
+            Invoice invoice = new Invoice(client.Name, 0, true, typeinv);
 
-        //    client.ClientInvoices.Add(invoice);
+            client.AddNewInvoice(invoice);
 
-        //    this.Close();
-        //}
+            this.Close();
+        }
     }
 }

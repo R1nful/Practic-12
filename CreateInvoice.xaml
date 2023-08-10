@@ -7,6 +7,9 @@
         xmlns:sys="clr-namespace:System;assembly=netstandard" 
         mc:Ignorable="d"
         Title="CreateInvoice" Height="165" Width="400" ResizeMode="NoResize">
+    <Window.Resources>
+        <sys:Double x:Key="MarginBtn">10</sys:Double>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>
@@ -24,12 +27,12 @@
         <TextBlock x:Name="ClientNameTextBlock"
                    Margin="10 0 0 0"
                        Grid.Row="1"
-                       Text="Укажите клиента:" />
+                       Text="Укажите клиента" />
 
         <TextBlock x:Name="TypeInvoiseTextBlock"
                    Margin="10 0 0 0"
                    Grid.Row="2"
-                   Text="Тип счета:" />
+                   Text="Тип счета" />
 
         <ComboBox x:Name="ClientNameCB"
                  Grid.Column="2"
