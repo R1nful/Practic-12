@@ -35,8 +35,6 @@ namespace Practic_12
             Invoice invoice = new Invoice(client.Name, 0, true, typeinv);
 
             client.AddNewInvoice(invoice);
-
-            this.Close();
         }
     }
 }

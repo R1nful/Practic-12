@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace Practic_12
@@ -42,7 +41,11 @@ namespace Practic_12
         private void AddInvoiceBtn_Click(object sender, RoutedEventArgs e)
         {
             if(decimal.TryParse(AddBalanceTB.Text, out decimal result))
-                (InvoiceLV.SelectedItem as Invoice)?.AddBalanse(result);
+            {
+                ITransaction<decimal> trans = (InvoiceLV.SelectedItem as Invoice);
+                trans.AddBalanse(result);
+            }
+                //(InvoiceLV.SelectedItem as Invoice)?.AddBalanse(result);
         }
 
         private void CreateInvoiceBtn_Click(object sender, RoutedEventArgs e)

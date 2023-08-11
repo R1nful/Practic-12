@@ -120,7 +120,7 @@
                     <GridView>
                         <GridViewColumn Header="Number" DisplayMemberBinding="{Binding Number}"/>
                         <GridViewColumn Header="Owner" DisplayMemberBinding="{Binding Owner}"/>
-                        <GridViewColumn Header="Balance" DisplayMemberBinding="{Binding Balance}"/>
+                        <GridViewColumn Header="Balance" DisplayMemberBinding="{Binding GetBalance}"/>
                         <GridViewColumn Header="Type" DisplayMemberBinding="{Binding TypeInvoice}"/>
                         <GridViewColumn Header="Open" DisplayMemberBinding="{Binding IsOpen}"/>
                     </GridView>

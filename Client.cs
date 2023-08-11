@@ -28,10 +28,14 @@ namespace Practic_12
 
         public void AddNewInvoice(Invoice invoice)
         {
-            if(ClientInvoices.Count<2)
-                if(ClientInvoices.Count==1 && ClientInvoices[0].TypeInvoice=="deposit")
-                ClientInvoices.Add(invoice);
-
+            if (ClientInvoices.Count < 2)
+                if (ClientInvoices.Count == 1 && ClientInvoices[0].TypeInvoice == invoice.TypeInvoice)
+                    MessageBox.Show("Такое тип счета уже существует");
+                else
+                {
+                    ClientInvoices.Add(invoice);
+                    MessageBox.Show("Счет создан");
+                }
             else
                 MessageBox.Show("Больше счетов сделать нельзя");
         }

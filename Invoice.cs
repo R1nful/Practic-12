@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Security.Principal;
+using System.Transactions;
 using System.Windows;
-
 namespace Practic_12
 {
 
-    internal class Invoice : INotifyPropertyChanged
+    internal class Invoice : INotifyPropertyChanged, ITransaction<decimal>, IAccount<Invoice>
     {
         static long num;
 
@@ -15,6 +16,7 @@ namespace Practic_12
         }
 
         private bool isOpen;
+
         private decimal balance;
 
         public long Number { get; }
@@ -59,7 +61,7 @@ namespace Practic_12
         /// </summary>
         /// <param name="trensferInvoice">Счет для перевода</param>
         /// <param name="trensferMoney">Сумма перевода</param>
-        public void TransferMoney(ref Invoice trensferInvoice, decimal trensferMoney)
+        public Invoice TransferMoney(Invoice trensferInvoice, decimal trensferMoney)
         {
             if (isOpen && trensferInvoice.IsOpen)
             {
@@ -78,6 +80,7 @@ namespace Practic_12
             {
                 MessageBox.Show("Перевод невозможен. Счет закрыт");
             }
+            return trensferInvoice;
         }
 
         /// <summary>

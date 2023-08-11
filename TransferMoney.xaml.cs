@@ -24,7 +24,9 @@ namespace Practic_12
                 {
                     Invoice transfer = (Invoice)TransferInvoiceLV.SelectedItem;
 
-                    ((Invoice)BaseInvoiceLV.SelectedItem).TransferMoney(ref transfer, result);
+                    IAccount<Invoice> trs = ((Invoice)BaseInvoiceLV.SelectedItem);
+
+                    transfer = trs.TransferMoney(transfer, result);
                 }
             }
         }
